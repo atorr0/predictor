@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 
 /**
- * Class with the following responsabilities:
+ * Class with the following responsibilities:
  * <ul>
  * <li>Definition of the main API for prediction logic</li>
  * <li>Implementation of the retry loop</li>
