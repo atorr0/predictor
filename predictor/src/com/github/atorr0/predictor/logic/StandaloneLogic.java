@@ -22,36 +22,11 @@ import org.apache.commons.io.IOUtils;
  */
 public abstract class StandaloneLogic<T> implements Iterable<T> {
 
-	/**
-	 * Simple stats. for hits & misses.
-	 *
-	 * @author https://github.com/atorr0
-	 */
-	public static final class Statistics {
-
-		final List<Long> missesList = new ArrayList<>();
-
-		long hits = 0, misses = 0;
-
-		void next() {
-
-			missesList.add(misses);
-			hits = 0;
-			misses = 0;
-		}
-
-		@Override
-		public String toString() {
-			return "Statistics [missesList=" + missesList + ", hits=" + hits + ", misses=" + misses + "]";
-		}
-
-	}
-
-	byte[] bs;
-
-	Statistics statistics = new Statistics();
+	protected byte[] bs;
 
 	protected int probabilitySpace;
+
+	protected Statistics statistics;
 
 	/**
 	 * Unique ctor.
@@ -60,6 +35,7 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 	 */
 	protected StandaloneLogic(final int probabilitySpace) {
 		this.probabilitySpace = probabilitySpace;
+		statistics = new Statistics();
 	}
 
 	public void build(final byte[] bs) {
@@ -70,13 +46,13 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 		bs = IOUtils.toByteArray(ins);
 	}
 
-	abstract void feedback(T t);
+	protected abstract void feedback(T t);
 
 	public Statistics getStatistics() {
 		return statistics;
 	}
 
-	abstract T predict(final List<T> previousResults);
+	protected abstract T predict(final List<T> previousResults);
 
 	public void run() {
 
@@ -103,5 +79,30 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 			feedback(t);
 			statistics.next();
 		}
+	}
+
+	/**
+	 * Simple stats. for hits & misses.
+	 *
+	 * @author https://github.com/atorr0
+	 */
+	public static final class Statistics {
+
+		protected final List<Long> missesList = new ArrayList<>();
+
+		protected long hits = 0, misses = 0;
+
+		protected void next() {
+
+			missesList.add(misses);
+			hits = 0;
+			misses = 0;
+		}
+
+		@Override
+		public String toString() {
+			return "Statistics [missesList=" + missesList + ", hits=" + hits + ", misses=" + misses + "]";
+		}
+
 	}
 }

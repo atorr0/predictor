@@ -3,8 +3,8 @@ package com.github.atorr0.predictor;
 import java.io.File;
 import java.io.FileInputStream;
 
-import com.github.atorr0.predictor.logic.NegativeLogic;
 import com.github.atorr0.predictor.logic.StandaloneLogic;
+import com.github.atorr0.predictor.logic._1bit.NegativeLogic;
 
 public class Main {
 

@@ -1,7 +1,9 @@
-package com.github.atorr0.predictor.logic;
+package com.github.atorr0.predictor.logic._1bit;
 
 import java.util.Iterator;
 import java.util.List;
+
+import com.github.atorr0.predictor.logic.StandaloneLogic;
 
 /**
  * Simple prediction logic that predicts the next bit as the negation of the
@@ -11,14 +13,14 @@ import java.util.List;
  */
 public class NegativeLogic extends StandaloneLogic<Boolean> {
 
-	Boolean previous = Boolean.FALSE;
+	protected Boolean previous = Boolean.FALSE;
 
 	public NegativeLogic() {
 		super(2);
 	}
 
 	@Override
-	void feedback(final Boolean t) {
+	protected void feedback(final Boolean t) {
 		previous = t;
 	}
 
@@ -45,7 +47,7 @@ public class NegativeLogic extends StandaloneLogic<Boolean> {
 	}
 
 	@Override
-	Boolean predict(final List<Boolean> previousResults) {
+	protected Boolean predict(final List<Boolean> previousResults) {
 		return previousResults.isEmpty() ? !previous : previous;
 	}
 
