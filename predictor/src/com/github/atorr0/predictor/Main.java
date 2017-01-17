@@ -8,7 +8,7 @@ import com.github.atorr0.predictor.logic._1bit.NegativeLogic;
 
 public class Main {
 
-	static File findBackwards(final String name) {
+	private static File findBackwards(final String name) {
 
 		File f = new File(".").getAbsoluteFile();
 
