@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-
 /**
  * Class with the following responsibilities:
  * <ul>
@@ -15,7 +13,6 @@ import org.apache.commons.io.IOUtils;
  * <li>Handling of statistics</li>
  * </ul>
  *
- * TODO Change byte[] working to InputStream.<br>
  * TODO A bit more documentation.
  *
  * @author https://github.com/atorr0
@@ -27,6 +24,8 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 	protected int probabilitySpace;
 
 	protected Statistics statistics;
+
+	protected InputStream is;
 
 	/**
 	 * Unique ctor.
@@ -42,17 +41,17 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 		this.bs = bs;
 	}
 
-	public void build(final InputStream ins) throws IOException {
-		bs = IOUtils.toByteArray(ins);
+	public void build(final InputStream is) throws IOException {
+		this.is = is;
 	}
 
-	protected abstract void feedback(T t);
+	public abstract void feedback(T t);
 
 	public Statistics getStatistics() {
 		return statistics;
 	}
 
-	protected abstract T predict(final List<T> previousResults);
+	public abstract T predict(final List<T> previousResults);
 
 	public void run() {
 
