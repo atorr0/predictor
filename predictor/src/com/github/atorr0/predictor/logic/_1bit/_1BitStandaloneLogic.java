@@ -21,6 +21,19 @@ public abstract class _1BitStandaloneLogic extends StandaloneLogic<Boolean> {
 		super(2);
 	}
 
+	/**
+	 * Delegation to {@link #predict()} as it's pointless to have a previous
+	 * results list (on 1 bit predictions).
+	 * 
+	 * @see com.github.atorr0.predictor.logic.StandaloneLogic#predict(java.util.List)
+	 */
+	@Override
+	public final Boolean predict(List<Boolean> previousPredictions) {
+		return predict();
+	}
+
+	public abstract Boolean predict();
+
 	@Override
 	public Iterator<Boolean> iterator() {
 		return new _1BitIterator(bs, is).iterator();
@@ -28,11 +41,9 @@ public abstract class _1BitStandaloneLogic extends StandaloneLogic<Boolean> {
 
 	public void run() {
 
-		final List<Boolean> previousResults = Arrays.asList();
-
 		for (final Boolean t : this) {
 
-			final Boolean predicted = predict(previousResults);
+			final Boolean predicted = predict();
 			if (!predicted.equals(t))
 				statistics.incrementMisses();
 

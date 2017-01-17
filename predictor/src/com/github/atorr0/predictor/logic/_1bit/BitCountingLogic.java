@@ -1,54 +1,48 @@
 package com.github.atorr0.predictor.logic._1bit;
 
-import java.util.Iterator;
 import java.util.List;
 
-import com.github.atorr0.predictor.logic.StandaloneLogic;
-
 /**
- * Simple prediction logic that predicts the next bit supposing that the bits
- * follow a .
+ * Simple prediction logic that predicts the next bit by counting the number of
+ * bits sets to 1.
  *
  * @author https://github.com/atorr0
  */
-public class CountingLogic extends StandaloneLogic<Boolean> {
+public class BitCountingLogic extends _1BitStandaloneLogic {
 
-	protected Boolean previous = Boolean.FALSE;
+	protected int[] bitCounts;
 
-	public CountingLogic() {
-		super(2);
+	protected byte[] bitBuffer;
+	protected long bitBufferIndex;
+
+	protected int bitCount;
+
+	public BitCountingLogic(final int bitCount) {
+		super();
+		init(bitCount);
 	}
 
 	@Override
-	protected void feedback(final Boolean t) {
-		previous = t;
+	public void feedback(final Boolean t) {
+		// TODO
+
+	}
+
+	protected void init(final int bitCount) {
+
+		final long allocatedBytes = 4L * bitCount + ((7L + bitCount) / 8);
+
+		System.out.println(String.format("Allocationg %s bytes for a bit count of %s", allocatedBytes, bitCount));
+
+		bitCounts = new int[bitCount];
+		bitBuffer = new byte[(7 + bitCount) / 8];
+		bitBufferIndex = this.bitCount = 0;
 	}
 
 	@Override
-	public Iterator<Boolean> iterator() {
-
-		return new Iterator<Boolean>() {
-
-			private long bitIndex = -1;
-
-			@Override
-			public boolean hasNext() {
-				return (bitIndex + 1) / 8 < bs.length;
-			}
-
-			@Override
-			public Boolean next() {
-
-				final byte b = bs[(int) ++bitIndex / 8];
-
-				return (b & (0x80 >> (bitIndex % 8))) == 0 ? Boolean.FALSE : Boolean.TRUE;
-			}
-		};
-	}
-
-	@Override
-	protected Boolean predict(final List<Boolean> previousResults) {
-		return previousResults.isEmpty() ? !previous : previous;
+	public Boolean predict() {
+		// TODO
+		throw new UnsupportedOperationException("Not implemented!");
 	}
 
 }

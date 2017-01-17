@@ -51,19 +51,19 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 		return statistics;
 	}
 
-	public abstract T predict(final List<T> previousResults);
+	public abstract T predict(final List<T> previousPredictions);
 
 	public void run() {
 
-		final List<T> previousResults = new ArrayList<>(probabilitySpace / 2);
+		final List<T> previousPredictions = new ArrayList<>(probabilitySpace / 2);
 
 		for (final T t : this) {
 
-			previousResults.clear();
+			previousPredictions.clear();
 
 			for (int i = 0; i < probabilitySpace; i++) {
 
-				final T predicted = predict(previousResults);
+				final T predicted = predict(previousPredictions);
 				if (predicted.equals(t)) {
 
 					statistics.hits++;
@@ -71,7 +71,7 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 				} else {
 
 					statistics.misses++;
-					previousResults.add(t);
+					previousPredictions.add(t);
 				}
 			}
 

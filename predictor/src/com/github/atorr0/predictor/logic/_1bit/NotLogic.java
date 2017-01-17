@@ -28,8 +28,8 @@ public class NotLogic extends _1BitStandaloneLogic {
 	}
 
 	@Override
-	public Boolean predict(List<Boolean> previousResults) {
-		return delegateLogic.predict(previousResults);
+	public Boolean predict() {
+		return delegateLogic.predict();
 	}
 
 	public void build(byte[] bs) {
