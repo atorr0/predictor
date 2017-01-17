@@ -91,6 +91,14 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 
 		protected long hits = 0, misses = 0;
 
+		public long incrementHits() {
+			return ++hits;
+		}
+
+		public long incrementMisses() {
+			return ++misses;
+		}
+
 		public void next() {
 
 			missesList.add(misses);
@@ -101,14 +109,6 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 		@Override
 		public String toString() {
 			return "Statistics [missesList=" + missesList + ", hits=" + hits + ", misses=" + misses + "]";
-		}
-
-		public long incrementMisses() {
-			return ++misses;
-		}
-
-		public long incrementHits() {
-			return ++hits;
 		}
 	}
 }

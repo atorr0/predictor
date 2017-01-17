@@ -1,6 +1,5 @@
 package com.github.atorr0.predictor.logic._1bit;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,24 +20,25 @@ public abstract class _1BitStandaloneLogic extends StandaloneLogic<Boolean> {
 		super(2);
 	}
 
-	/**
-	 * Delegation to {@link #predict()} as it's pointless to have a previous
-	 * results list (on 1 bit predictions).
-	 * 
-	 * @see com.github.atorr0.predictor.logic.StandaloneLogic#predict(java.util.List)
-	 */
-	@Override
-	public final Boolean predict(List<Boolean> previousPredictions) {
-		return predict();
-	}
-
-	public abstract Boolean predict();
-
 	@Override
 	public Iterator<Boolean> iterator() {
 		return new _1BitIterator(bs, is).iterator();
 	}
 
+	public abstract Boolean predict();
+
+	/**
+	 * Delegation to {@link #predict()} as it's pointless to have a previous
+	 * results list (on 1 bit predictions).
+	 *
+	 * @see com.github.atorr0.predictor.logic.StandaloneLogic#predict(java.util.List)
+	 */
+	@Override
+	public final Boolean predict(final List<Boolean> previousPredictions) {
+		return predict();
+	}
+
+	@Override
 	public void run() {
 
 		for (final Boolean t : this) {

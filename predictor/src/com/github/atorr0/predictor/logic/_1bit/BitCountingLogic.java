@@ -1,7 +1,5 @@
 package com.github.atorr0.predictor.logic._1bit;
 
-import java.util.List;
-
 /**
  * Simple prediction logic that predicts the next bit by counting the number of
  * bits sets to 1.
