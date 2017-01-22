@@ -66,15 +66,11 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 			for (int i = 0; i < probabilitySpace; i++) {
 
 				final T predicted = predict(previousPredictions);
-				if (predicted.equals(t)) {
-
-					statistics.incrementHits();
+				if (predicted.equals(t))
 					break;
-				} else {
 
-					statistics.incrementMisses();
-					previousPredictions.add(t);
-				}
+				statistics.incrementMisses();
+				previousPredictions.add(t);
 			}
 
 			feedback(t);
@@ -82,5 +78,4 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 		}
 	}
 
-	
 }

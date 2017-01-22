@@ -43,8 +43,6 @@ public abstract class _1BitStandaloneLogic extends StandaloneLogic<Boolean> {
 			if (!predicted.equals(t))
 				statistics.incrementMisses();
 
-			statistics.incrementHits();
-
 			feedback(t);
 			statistics.next();
 		}
