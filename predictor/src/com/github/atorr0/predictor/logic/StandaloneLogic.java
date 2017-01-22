@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.atorr0.predictor.statistics.Statistics;
+
 /**
  * Class with the following responsibilities:
  * <ul>
@@ -66,11 +68,11 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 				final T predicted = predict(previousPredictions);
 				if (predicted.equals(t)) {
 
-					statistics.hits++;
+					statistics.incrementHits();
 					break;
 				} else {
 
-					statistics.misses++;
+					statistics.incrementMisses();
 					previousPredictions.add(t);
 				}
 			}
@@ -80,35 +82,5 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 		}
 	}
 
-	/**
-	 * Simple stats. for hits & misses.
-	 *
-	 * @author https://github.com/atorr0
-	 */
-	public static final class Statistics {
-
-		protected final List<Long> missesList = new ArrayList<>();
-
-		protected long hits = 0, misses = 0;
-
-		public long incrementHits() {
-			return ++hits;
-		}
-
-		public long incrementMisses() {
-			return ++misses;
-		}
-
-		public void next() {
-
-			missesList.add(misses);
-			hits = 0;
-			misses = 0;
-		}
-
-		@Override
-		public String toString() {
-			return "Statistics [missesList=" + missesList + ", hits=" + hits + ", misses=" + misses + "]";
-		}
-	}
+	
 }
