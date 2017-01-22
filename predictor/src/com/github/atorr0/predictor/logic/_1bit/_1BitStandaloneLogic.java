@@ -6,11 +6,7 @@ import java.util.List;
 import com.github.atorr0.predictor.logic.StandaloneLogic;
 
 /**
- * Class with the following responsibilities:
- * <ul>
- * <li>Definition of the main API for 1 bit prediction logic</li>
- * <li>Implementation of the retry loop</li>
- * </ul>
+ * Definition and optimization of the 1 bit prediction logic.
  *
  * @author https://github.com/atorr0
  */

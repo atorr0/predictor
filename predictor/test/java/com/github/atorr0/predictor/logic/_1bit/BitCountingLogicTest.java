@@ -13,11 +13,13 @@ public class BitCountingLogicTest {
 
 		logic.build(new byte[] { 10 });
 		
-		logic.feedback(true);
-		logic.feedback(false);
-		logic.feedback(true);
+//		logic.feedback(true);
+//		logic.feedback(false);
+//		logic.feedback(true);
 		
-//		logic.run();
+		logic.run();
+		
+		System.out.println(logic.getStatistics());
 
 	}
 
