@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.atorr0.predictor.statistics.Statistics;
+import com.github.atorr0.predictor.statistics.VerboseStatistics;
 
 /**
  * Class with the following responsibilities:
@@ -36,7 +37,7 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 	 */
 	protected StandaloneLogic(final int probabilitySpace) {
 		this.probabilitySpace = probabilitySpace;
-		statistics = new Statistics();
+		setStatistics(new VerboseStatistics());
 	}
 
 	public void build(final byte[] bs) {
@@ -63,7 +64,7 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 
 			previousPredictions.clear();
 
-			for (int i = 0; i < probabilitySpace; i++) {
+			for (int i = 1; i < probabilitySpace; i++) {
 
 				final T predicted = predict(previousPredictions);
 				if (predicted.equals(t))
@@ -76,6 +77,10 @@ public abstract class StandaloneLogic<T> implements Iterable<T> {
 			feedback(t);
 			statistics.next();
 		}
+	}
+
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
 	}
 
 }

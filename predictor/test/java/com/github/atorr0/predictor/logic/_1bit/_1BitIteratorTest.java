@@ -1,6 +1,7 @@
 package com.github.atorr0.predictor.logic._1bit;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import java.util.Iterator;
 
@@ -14,16 +15,16 @@ public class _1BitIteratorTest {
 		final Iterator<Boolean> it = new _1BitIterator(new byte[] { 10 }).iterator();
 
 		assertTrue(it.hasNext());
-		assertTrue(!it.next());
-		assertTrue(!it.next());
-		assertTrue(!it.next());
-		assertTrue(!it.next());
+		assertFalse(it.next());
+		assertFalse(it.next());
+		assertFalse(it.next());
+		assertFalse(it.next());
 		//
 		assertTrue(it.next());
-		assertTrue(!it.next());
+		assertFalse(it.next());
 		assertTrue(it.next());
-		assertTrue(!it.next());
-		assertTrue(!it.hasNext());
+		assertFalse(it.next());
+		assertFalse(it.hasNext());
 	}
 
 	@Test
@@ -37,15 +38,15 @@ public class _1BitIteratorTest {
 
 			assertTrue(it.hasNext());
 			assertTrue(it.next());
-			assertTrue(!it.next());
-			assertTrue(!it.next());
-			assertTrue(!it.next());
+			assertFalse(it.next());
+			assertFalse(it.next());
+			assertFalse(it.next());
 			//
-			assertTrue(!it.next());
-			assertTrue(!it.next());
-			assertTrue(!it.next());
+			assertFalse(it.next());
+			assertFalse(it.next());
+			assertFalse(it.next());
 			assertTrue(it.next());
-			assertTrue(!it.hasNext());
+			assertFalse(it.hasNext());
 		}
 	}
 

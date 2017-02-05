@@ -38,7 +38,7 @@ class ByteArrayIterator implements Iterator<Boolean> {
 	public ByteArrayIterator(final byte[] bs) {
 
 		if (bs == null)
-			throw new NullPointerException();
+			throw new IllegalArgumentException();
 
 		this.bs = bs;
 	}
@@ -83,7 +83,7 @@ class InputStreamIterator implements Iterator<Boolean> {
 
 			return i != -1;
 		} catch (final IOException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 	}
 

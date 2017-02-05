@@ -8,6 +8,7 @@ package com.github.atorr0.predictor.logic._1bit;
  */
 public class BitCountingLogic extends _1BitStandaloneLogic {
 
+	private static final int _DEBUG_COUNT = 1000;
 	protected int[] bitCounts;
 	protected int bitCountsIndex;
 
@@ -18,15 +19,28 @@ public class BitCountingLogic extends _1BitStandaloneLogic {
 		init(bitCount);
 	}
 
+	private int _debugCount = _DEBUG_COUNT;
+
 	@Override
 	public void feedback(final Boolean t) {
 
 		if (buffer.read())
-			bitCountsIndex += t ? 0 : -1;
+			bitCountsIndex += !t && 0 <= bitCountsIndex - 1 ? -1 : 0;
 		else
-			bitCountsIndex += t ? 1 : 0;
+			bitCountsIndex += t && bitCountsIndex + 1 < bitCounts.length ? 1 : 0;
 
 		bitCounts[bitCountsIndex]++;
+
+		// Print debug info?
+		if (--_debugCount == 0) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("bitCounts:[");
+			for (int i : bitCounts)
+				sb.append(i).append(',');
+
+			System.out.println(sb + "] bitCountsIndex:" + bitCountsIndex);
+			_debugCount = _DEBUG_COUNT;
+		}
 
 		buffer.write(t);
 	}
@@ -36,11 +50,11 @@ public class BitCountingLogic extends _1BitStandaloneLogic {
 		if (bitCount <= 0)
 			throw new IllegalArgumentException();
 
-		final long allocationBytes = 4L * bitCount + 4L + CircularBitBuffer.size(bitCount);
+		final long allocationBytes = 4L * (1 + bitCount) + 4L + CircularBitBuffer.size(bitCount);
 
 		System.out.println(String.format("Allocationg %s bytes for a bit count of %s", allocationBytes, bitCount));
 
-		bitCounts = new int[bitCount];
+		bitCounts = new int[bitCount + 1];
 		buffer = new CircularBitBuffer(bitCount);
 	}
 
@@ -54,7 +68,7 @@ public class BitCountingLogic extends _1BitStandaloneLogic {
 		{
 			int bci = bitCountsIndex;
 			if (b)
-				bci += -1;
+				bci += bci - 1 < 0 ? 0 : -1;
 			else
 				bci += 0;
 
@@ -66,7 +80,7 @@ public class BitCountingLogic extends _1BitStandaloneLogic {
 			if (b)
 				bci += 0;
 			else
-				bci += 1;
+				bci += bci + 1 == bitCounts.length ? 0 : 1;
 
 			bitCounts1 = bitCounts[bci];
 		}

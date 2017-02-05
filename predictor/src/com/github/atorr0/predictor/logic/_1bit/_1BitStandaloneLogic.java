@@ -12,8 +12,10 @@ import com.github.atorr0.predictor.logic.StandaloneLogic;
  */
 public abstract class _1BitStandaloneLogic extends StandaloneLogic<Boolean> {
 
+	public static final int PROBABILITY_SPACE = 2;
+
 	protected _1BitStandaloneLogic() {
-		super(2);
+		super(PROBABILITY_SPACE);
 	}
 
 	@Override

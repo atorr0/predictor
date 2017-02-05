@@ -38,7 +38,6 @@ public class Statistics {
 
 		return "Statistics [" //
 				+ "hitRatio=" + getHitRatio() //
-				+ ", missesList=" + missesList //
 				+ ", misses=" + misses //
 				+ "]";
 	}
