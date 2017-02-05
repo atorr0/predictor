@@ -39,7 +39,7 @@ public class NotLogic extends _1BitStandaloneLogic {
 
 	@Override
 	public Boolean predict() {
-		return delegateLogic.predict();
+		return !delegateLogic.predict();
 	}
 
 	@Override
